@@ -35,6 +35,12 @@ df = df.drop(columns = 'Dividends')
 df.dtypes
 df2 = df[df['Date'] >= '2000-01-01']
 
+#get list of column names in dataframe 'df2' reorder columns and change columns names
+list(df2.columns)
+df2 = df2[['Company', 'Date', 'Open', 'Close', 'Adj Close', 'High', 'Low',
+           'Volume', 'Stock Splits']]
+df2 = df2.rename(columns = {'Adj Close': 'Adjusted Closing Price'})
+
 #generate descriptive stats values
 df2_new.describe()
 
@@ -46,3 +52,8 @@ np.count_nonzero(df2)
 np.min(df2)
 np.max(df2)
 np.mean(df2)
+
+df2.to_csv('C:/Users/teren/Desktop/Projects/streaming_services.csv', index = False)
+
+
+
