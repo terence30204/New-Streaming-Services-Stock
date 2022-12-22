@@ -1,0 +1,48 @@
+import pandas as pd
+import numpy as np
+
+df_ama = pd.read_csv(r'C:\Users\teren\Desktop\datasets\Amazon.csv')
+df_dis = pd.read_csv(r'C:\Users\teren\Desktop\datasets\disney stock.csv')
+df_net = pd.read_csv(r'C:\Users\teren\Desktop\datasets\Netflix_stock_history.csv')
+
+df_ama.head()
+list(df_ama.columns)
+
+df_dis.head()
+list(df_dis.columns)
+
+df_net.head()
+list(df_net.columns)
+
+#original dataset had no column names, line below used to add column names
+df_dis.columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']
+
+#adding 'Company' column to all datasets to indicate company
+df_ama.insert(1, 'Company', 'Amazon')
+df_dis.insert(1, 'Company', 'Disney')
+df_net.insert(1, 'Company', 'Netflix')
+
+#joining all 3 datasets
+df = pd.merge(df_ama, df_dis, how='outer')
+df = pd.merge(df, df_net, how='outer')
+
+#identifying and droping zero columns
+df['Dividends'].sum()
+df['Stock Splits'].sum()
+df = df.drop(columns = 'Dividends')
+
+#identify data type for each column and create new dataset based on dates on or after January 1, 2000
+df.dtypes
+df2 = df[df['Date'] >= '2000-01-01']
+
+#generate descriptive stats values
+df2_new.describe()
+
+#create correlation matrix
+cor_mat = df.corr()
+cor_mat2 = df2.corr()
+
+np.count_nonzero(df2)
+np.min(df2)
+np.max(df2)
+np.mean(df2)
