@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 df_ama = pd.read_csv(r'C:\Users\teren\Desktop\datasets\Amazon.csv')
 df_dis = pd.read_csv(r'C:\Users\teren\Desktop\datasets\disney stock.csv')
@@ -78,6 +79,11 @@ df4["Open"].min()
 
 df4["Close"].max()
 df4["Close"].min()
+
+plt.plot('Date', 'Open', data = df4, color = 'blue', linewidth = 2)
+plt.plot('Date', 'Close', data = df4, color = 'red', linewidth = 2)
+plt.legend()
+plt.show()
 
 df2.to_csv('C:/Users/teren/Desktop/Projects/streaming_services.csv', index = False)
 df4.to_csv('C:/Users/teren/Desktop/Projects/streaming_services.csv', index = False)
