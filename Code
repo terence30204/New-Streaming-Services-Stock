@@ -42,7 +42,7 @@ df2 = df2[['Company', 'Date', 'Open', 'Close', 'Adj Close', 'High', 'Low',
 df2 = df2.rename(columns = {'Adj Close': 'Adjusted Closing Price'})
 
 #generate descriptive stats values
-df2_new.describe()
+df2_new = df2.describe()
 
 #create correlation matrix
 cor_mat = df.corr()
@@ -53,7 +53,34 @@ np.min(df2)
 np.max(df2)
 np.mean(df2)
 
+df3 = df2[df2['Date'] >= '2005-01-01']
+df3 = df3.reset_index()
+df3 = df3.drop(columns = 'index')
+df3['Stock Splits'].value_counts()
+df3['Stock Splits'].sum()
+
+#finding date where stock split != 0
+i = 0.0
+for i in range(len(df3)):
+    if df3.loc[i, 'Stock Splits'] == 7.0:
+        print(df3.loc[i,'Date'])
+        break
+    else:
+        continue
+
+#dropping "Stock Splits" column
+df4 = df3.drop(columns = 'Stock Splits')
+df4 = df4.reset_index()
+df4 = df4.drop(columns = 'index')
+
+df4["Open"].max()
+df4["Open"].min()
+
+df4["Close"].max()
+df4["Close"].min()
+
 df2.to_csv('C:/Users/teren/Desktop/Projects/streaming_services.csv', index = False)
+df4.to_csv('C:/Users/teren/Desktop/Projects/streaming_services.csv', index = False)
 
 
 
